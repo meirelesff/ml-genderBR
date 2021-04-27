@@ -1,4 +1,6 @@
 .venv
 raw_data
+models
+results
 __pycache__
 .secrets.*

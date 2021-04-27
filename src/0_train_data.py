@@ -14,7 +14,7 @@ def baixa_nomes():
     nomes = pd.read_csv(BytesIO(res), compression = "gzip")
 
     # Calculate and return proportion of female uses of a name
-    nomes["prop_female"] = (nomes.frequency_female / nomes.frequency_total).fillna(0)
+    nomes.loc[:, "prop_female"] = (nomes.frequency_female / nomes.frequency_total).fillna(0)
     nomes = nomes[["first_name", "prop_female"]]
     nomes.to_csv("raw_data/nomes.csv", index = False)
 
