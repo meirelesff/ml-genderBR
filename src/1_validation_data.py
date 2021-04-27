@@ -5,6 +5,7 @@ import pandas as pd
 import shutil
 import os
 
+
 def baixa_validacao_tse(url, tmp="tmp", chunk_size=256):
 
     if not os.path.exists(tmp):
@@ -15,7 +16,7 @@ def baixa_validacao_tse(url, tmp="tmp", chunk_size=256):
     with open(tmp + "/tse.zip", "wb") as fd:
         for chunk in res.iter_content(chunk_size=chunk_size):
             fd.write(chunk)
-
+            
     dados = ZipFile(tmp + "/tse.zip")
     dados.extractall(path=tmp)
 
@@ -28,7 +29,7 @@ def baixa_validacao_tse(url, tmp="tmp", chunk_size=256):
 
     # Cleaning, strip accents
     nomes_tse = nomes_tse.query("sg_uf_nascimento != 'ZZ'") # Brazilian-born only
-    nomes_tse.loc[:, "nm_candidato"] = nomes_tse.nm_candidato\
+    nomes_tse.loc[:, "nm_candidato"] = nomes_tse.loc[:, "nm_candidato"]\
         .apply(lambda x: unidecode(x)\
             .lower()\
                 .split(" ")[0])
