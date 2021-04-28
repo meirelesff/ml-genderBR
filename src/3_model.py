@@ -52,6 +52,6 @@ def train_models(y, x, model, pipe, grid, settings):
 if __name__ == "__main__":
     y, x = prepare_sample("raw_data/nomes.csv", settings)
     train_models(y, x, "nb", pps.nb_pipe, pps.grid_nb, settings)
-#    train_models(y, x, "svm", pps.svm_pipe, pps.grid_svm, settings)
-#    train_models(y, x, "xgb", pps.xgb_pipe, pps.grid_xgb, settings)
+    train_models(y, x, "svm", pps.svm_pipe, pps.grid_svm, settings)
+    train_models(y, x, "xgb", pps.xgb_pipe, pps.grid_xgb, settings)
 
