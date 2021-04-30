@@ -44,5 +44,6 @@ grid_xgb = [{
     "feat__k" : k,
     "clf__max_depth" : [3, 4, 5, 6, 7, 8, 9, 10],
     "clf__min_child_weight" : [0.1, 1, 100,1000],
-    "clf__gamma" : [0.1, 1, 100,1000]
+    "clf__gamma" : np.arange(0.01, 30, 0.01),
+    "clf__subsample": np.arange(0.01, 1.0, 0.01)
     }]

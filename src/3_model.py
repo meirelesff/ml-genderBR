@@ -1,4 +1,4 @@
-from sklearn.model_selection import GridSearchCV, RepeatedKFold
+from sklearn.model_selection import GridSearchCV, RandomizedSearchCV, RepeatedKFold
 from config import settings
 import pipelines as pps
 import pandas as pd
@@ -29,7 +29,7 @@ def prepare_sample(arq, settings):
 
 
 # Function to train models
-def train_models(y, x, model, pipe, grid, settings):
+def train_models(y, x, model, pipe, grid, settings, random_cv=False):
 
     if not os.path.exists("models"):
         os.makedirs("models")
@@ -41,17 +41,21 @@ def train_models(y, x, model, pipe, grid, settings):
     rcv = RepeatedKFold(n_splits=settings.splits, n_repeats=settings.repeats,
                         random_state=settings.seed)
 
-    gs = GridSearchCV(pipe, grid, cv=rcv, n_jobs=settings.threads, 
+    if not random_cv:
+        gs = GridSearchCV(pipe, grid, cv=rcv, n_jobs=settings.threads, 
                       scoring="accuracy").fit(x, y)
+    else:
+        gs = RandomizedSearchCV(pipe, grid, cv=rcv, n_jobs=settings.threads, 
+                      scoring="accuracy", n_iter=settings.n_iter,
+                      random_state=settings.seed).fit(x, y, clf__eval_metric="logloss")
 
     # Save training logs and best model
     pd.DataFrame(gs.cv_results_).to_csv("results/" + model + "_train.csv", index=False)
-    joblib.dump(gs.best_estimator_, "models/best_" + model + ".pkl")
+    joblib.dump(gs.best_estimator_, "src/models/best_" + model + ".pkl")
 
 
 if __name__ == "__main__":
     y, x = prepare_sample("raw_data/nomes.csv", settings)
-    train_models(y, x, "nb", pps.nb_pipe, pps.grid_nb, settings)
-    train_models(y, x, "svm", pps.svm_pipe, pps.grid_svm, settings)
-    train_models(y, x, "xgb", pps.xgb_pipe, pps.grid_xgb, settings)
-
+    #train_models(y, x, "nb", pps.nb_pipe, pps.grid_nb, settings)
+    #train_models(y, x, "svm", pps.svm_pipe, pps.grid_svm, settings)
+    train_models(y, x, "xgb", pps.xgb_pipe, pps.grid_xgb, settings, random_cv=True)
