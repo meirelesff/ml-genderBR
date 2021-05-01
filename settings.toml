@@ -2,11 +2,11 @@
 mongo_add = "localhost"
 
 # Train data 
-sample_size = 5000 # "all" to use all the data
+sample_size = "all" # "all" to use all the data
 
 # Models
 seed = 222 # Reprodutible seed
-splits = 3 # K folds in the data
-repeats = 1 # Number of cvs
+splits = 5 # K folds in the data
+repeats = 5 # Number of cvs
 threads = -1 # -1 to use all available cores
-n_iter = 1 # Number of random params used in randomgridsearch
+n_iter = 50 # Number of random draws used in randomgridsearch
