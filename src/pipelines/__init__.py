@@ -14,12 +14,12 @@ nb_pipe = Pipeline([("vect", CountVectorizer(analyzer="char_wb")),
 
 svm_pipe = Pipeline([("vect", CountVectorizer(analyzer="char_wb")),
                     ("feat", SelectKBest(chi2)), 
-                    ("clf", SGDClassifier())
+                    ("clf", SGDClassifier(random_state=222))
                     ])
 
 xgb_pipe = Pipeline([("vect", CountVectorizer(analyzer="char_wb")),
                     ("feat", SelectKBest(chi2)), 
-                    ("clf", XGBClassifier(use_label_encoder=False))
+                    ("clf", XGBClassifier(use_label_encoder=False, random_state=222))
                     ])
 
 # Grid search params

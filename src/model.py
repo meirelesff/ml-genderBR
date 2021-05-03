@@ -54,8 +54,9 @@ def train_models(y, x, model, pipe, grid, settings, random_cv=False):
     joblib.dump(gs.best_estimator_, "src/models/best_" + model + ".pkl")
 
 
+
 if __name__ == "__main__":
     y, x = prepare_sample("raw_data/nomes.csv", settings)
-    #train_models(y, x, "nb", pps.nb_pipe, pps.grid_nb, settings)
-    #train_models(y, x, "svm", pps.svm_pipe, pps.grid_svm, settings)
+    train_models(y, x, "nb", pps.nb_pipe, pps.grid_nb, settings)
+    train_models(y, x, "svm", pps.svm_pipe, pps.grid_svm, settings)
     train_models(y, x, "xgb", pps.xgb_pipe, pps.grid_xgb, settings, random_cv=True)
