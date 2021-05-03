@@ -10,3 +10,8 @@ splits = 5 # K folds in the data
 repeats = 5 # Number of cvs
 threads = -1 # -1 to use all available cores
 n_iter = 50 # Number of random draws used in randomgridsearch
+
+# LSTM model config
+pad = 20 # Max character length used to truncate names
+epochs = 2
+batch_size = 128
