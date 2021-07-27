@@ -1,3 +1,5 @@
+> This repository will no longer be mantained. 
+
 # ml-genderBR
 
 This project aims to advance on previous [genderBR](https://github.com/meirelesff/genderBR) algorithm used to predict gender from Brazilian first names. In its current form, the method uses data collected by the IBGE's Brazilian Census to make predictions: if a given first name is used by, say, 99% Brazilian males, then it is probable that a person with this given name is a male person. Using this simple logic, [gendeBR](https://github.com/meirelesff/genderBR) attributes gender when most uses of a given name pertains to people of a specific gender. With this simples method, it achieves more than 95% accuracy in gender prediction based on first names.
